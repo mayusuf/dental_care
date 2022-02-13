@@ -27,9 +27,9 @@ const Content = () => {
   return (
         <main className={classes.fullWidth}>
             <div className={classes.toolbar} />
-            <div className={classes.title}>
+            {/* <div className={classes.title}>
                 <Typography variant='h6'>Blog</Typography>
-            </div>
+            </div>  */}
             <div className={classes.content}>
                     <RoutePath />
             </div>

@@ -8,6 +8,7 @@ import HomeIcon from '@material-ui/icons//Home';
 import AddIcon from '@material-ui/icons//Add';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import ExitToApp from '@material-ui/icons/ExitToApp';
+import ListIcon from '@material-ui/icons/List';
 import { makeStyles } from '@material-ui/core/styles';
 import { Avatar } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
@@ -52,18 +53,32 @@ const LeftSideBar = () => {
       </Grid>
 
       <List>
-         <ListItem button key="Home">
+         <ListItem button component="a" href="/">
             <ListItemIcon>
               {<HomeIcon />}
             </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>
 
-          <ListItem button key="New Patient">
+          <ListItem button component="a" href="newpatient">
             <ListItemIcon>
               {<AddIcon />}
             </ListItemIcon>
             <ListItemText primary="New Patient" />
+          </ListItem>
+
+          <ListItem button  component="a" href="problems">
+            <ListItemIcon>
+              {<ListIcon />}
+            </ListItemIcon>
+            <ListItemText primary="Problems" />
+          </ListItem>
+
+          <ListItem button  component="a" href="advices">
+            <ListItemIcon>
+              {<ListIcon />}
+            </ListItemIcon>
+            <ListItemText primary="Advices" />
           </ListItem>
 
           <ListItem button key="Profile">
