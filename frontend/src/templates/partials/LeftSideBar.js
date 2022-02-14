@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -12,7 +12,9 @@ import ListIcon from '@material-ui/icons/List';
 import { makeStyles } from '@material-ui/core/styles';
 import { Avatar } from '@material-ui/core';
 import { Grid } from '@material-ui/core';
-
+import Collapse from '@mui/material/Collapse';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
 const drawerWidth = 240;
 
@@ -36,6 +38,12 @@ const useStyles = makeStyles(theme => ({
 const LeftSideBar = () => {
 
   const classes = useStyles();
+
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
   return (
 
@@ -67,12 +75,34 @@ const LeftSideBar = () => {
             <ListItemText primary="New Patient" />
           </ListItem>
 
-          <ListItem button  component="a" href="problems">
+          <ListItem button  onClick={handleClick} >
             <ListItemIcon>
               {<ListIcon />}
             </ListItemIcon>
             <ListItemText primary="Problems" />
+            {open ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
+
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <List  component="div" disablePadding >
+
+              <ListItem button  component="a" href="problems" >
+                <ListItemIcon>
+                  {<ListIcon />}
+                </ListItemIcon>
+                <ListItemText primary="Problems List" />
+              </ListItem>   
+                
+              <ListItem button  component="a" href="newproblem">
+                <ListItemIcon>
+                  {<AddIcon />}
+                </ListItemIcon>
+                <ListItemText primary="NewProblem" />
+              </ListItem>
+
+            </List>
+          </Collapse>
+           
 
           <ListItem button  component="a" href="advices">
             <ListItemIcon>

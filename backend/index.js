@@ -32,18 +32,18 @@ app.get("/api/getFromId/:id", (req,res)=>{
     });
 
 
-// Route for creating the post
-app.post('/api/create', (req,res)=> {
+// Route for creating the problem
+app.post('/api/problem/create', (req,res)=> {
 
-    const username = req.body.userName;
-    const title = req.body.title;
-    const text = req.body.text;
-    
-    db.query("INSERT INTO posts (title, post_text, user_name) VALUES (?,?,?)",[title,text,username], (err,result)=>{
+    const problem = req.body.problem;
+    const createDate = new Date().toISOString().slice(0, 10);
+
+    db.query("INSERT INTO problems (problem,createDate) VALUES (? , ?)",[problem,createDate], (err,result)=>{
        if(err) {
         console.log(err)
+       }else{
+        res.send(result);
        } 
-        console.log(result);
     });   
 })    
 
