@@ -9,28 +9,14 @@ app.use(express.json());
 
 
 // Route to get all posts
-app.get("/api/get", (req,res)=>{
-    db.query("SELECT * FROM posts", (err,result)=>{
-        if(err) {
-        console.log(err)
-        } 
-    res.send(result)
-    });   
-});
-
-
-// Route to get one post
-app.get("/api/getFromId/:id", (req,res)=>{
-
-    const id = req.params.id;
-     db.query("SELECT * FROM posts WHERE id = ?", id,  (err,result)=>{
+app.get("/api/problems", (req,res)=>{
+    db.query("SELECT * FROM problems where isActive = ? order by id DESC", [1] ,(err,result)=>{
         if(err) {
             console.log(err)
         } 
         res.send(result)
-        });   
-    });
-
+    });   
+});
 
 // Route for creating the problem
 app.post('/api/problem/create', (req,res)=> {
@@ -45,7 +31,22 @@ app.post('/api/problem/create', (req,res)=> {
         res.send(result);
        } 
     });   
-})    
+})   
+
+// Route to get one post
+app.get("/api/getFromId/:id", (req,res)=>{
+
+    const id = req.params.id;
+     db.query("SELECT * FROM posts WHERE id = ?", id,  (err,result)=>{
+        if(err) {
+            console.log(err)
+        } 
+        res.send(result)
+        });   
+    });
+
+
+ 
 
 // Route to like a post
 app.post('/api/like/:id',(req,res)=>{
