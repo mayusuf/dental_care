@@ -57,7 +57,7 @@ const LeftSideBar = () => {
       }}
     >
       <Grid container justify='center' alignItems='center'>
-        <Avatar src= "images/yusuf.jpg" className={classes.bigAvatar} />
+        <Avatar src= "/images/yusuf.jpg" className={classes.bigAvatar} />
       </Grid>
 
       <List>
@@ -68,7 +68,7 @@ const LeftSideBar = () => {
             <ListItemText primary="Home" />
           </ListItem>
 
-          <ListItem button component="a" href="newpatient">
+          <ListItem button component="a" href="/newpatient">
             <ListItemIcon>
               {<AddIcon />}
             </ListItemIcon>
@@ -86,25 +86,24 @@ const LeftSideBar = () => {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <List  component="div" disablePadding >
 
-              <ListItem button  component="a" href="problems" >
+              <ListItem button  component="a" href="/problems" >
                 <ListItemIcon>
                   {<ListIcon />}
                 </ListItemIcon>
                 <ListItemText primary="Problems List" />
               </ListItem>   
                 
-              <ListItem button  component="a" href="newproblem">
+              <ListItem button  component="a" href="/newproblem">
                 <ListItemIcon>
                   {<AddIcon />}
                 </ListItemIcon>
-                <ListItemText primary="NewProblem" />
+                <ListItemText primary="New Problem" />
               </ListItem>
 
             </List>
-          </Collapse>
-           
+          </Collapse>           
 
-          <ListItem button  component="a" href="advices">
+          <ListItem button  component="a" href="/advices">
             <ListItemIcon>
               {<ListIcon />}
             </ListItemIcon>

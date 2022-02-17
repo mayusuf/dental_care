@@ -33,42 +33,44 @@ app.post('/api/problem/create', (req,res)=> {
     });   
 })   
 
-// Route to get one post
-app.get("/api/getFromId/:id", (req,res)=>{
+// Route to get one problem
+app.get("/api/problem/update/:id", (req,res)=>{
 
     const id = req.params.id;
-     db.query("SELECT * FROM posts WHERE id = ?", id,  (err,result)=>{
+     db.query("SELECT * FROM problems WHERE id = ?", id,  (err,result)=>{
         if(err) {
             console.log(err)
         } 
-        res.send(result)
+            res.send(result)
         });   
     });
 
-
- 
-
 // Route to like a post
-app.post('/api/like/:id',(req,res)=>{
+app.put('/api/problem/update/:id',(req,res)=>{
 
     const id = req.params.id;
-    db.query("UPDATE posts SET likes = likes + 1 WHERE id = ?",id, (err,result)=>{
+    const problem = req.body.problem;
+
+    db.query("UPDATE problems SET problem = ? WHERE id = ?",[problem,id], (err,result)=>{
         if(err) {
-            console.log(err)   } 
-            console.log(result)
+            console.log(err)
+           }else{
+            res.send(result);
+           } 
         });    
 });
 
-
 // Route to delete a post
 
-app.delete('/api/delete/:id',(req,res)=>{
+app.delete('/api/problem/delete/:id',(req,res)=>{
     const id = req.params.id;
     
-    db.query("DELETE FROM posts WHERE id= ?", id, (err,result)=>{
-    if(err) {
-        console.log(err)
-            } 
+    db.query("DELETE FROM problems WHERE id= ?", id, (err,result)=>{
+        if(err) {
+            console.log(err)
+        }else{
+            res.send(result);
+        } 
     }) 
 });
 

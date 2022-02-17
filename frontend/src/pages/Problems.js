@@ -13,6 +13,8 @@ import Typography from '@mui/material/Typography';
 import Axios from 'axios'
 import {API_URL} from '../config/constants'
 
+import Dialog from '@mui/material/Dialog';
+import Alert from '@mui/material/Alert';
 
 const ProblemsData = () => {
 
@@ -31,8 +33,27 @@ const ProblemsData = () => {
 const  Problems = () => {
 
   const problems = ProblemsData();
+  const [openSuccess, setSuccess] = useState(false);
 
-  console.log(problems); 
+  const deleteProblem = (id) => {
+    
+       Axios.delete(`${API_URL}/problem/delete/${id}`).then(res => {
+        if (res.data.affectedRows === 1) {
+            handleSuccessMessage();               
+            
+        }
+    })
+  }
+
+  const handleSuccessMessage = () => {
+
+    setSuccess(!openSuccess);  
+
+    setTimeout(() => {
+        setSuccess(openSuccess);  ;
+        window.location = "/problems";
+    }, 3000);
+  }; 
 
   return (
 
@@ -59,17 +80,20 @@ const  Problems = () => {
                 </TableCell>
                 <TableCell align="left">
 
-                <ListItem button component="a" href={`editproblem/${item.id}`}>
+                <ListItem  component="a" href={`/updateproblem/${item.id}`}>
                   <ListItemText primary="Edit" />
                 </ListItem>
 
-                <ListItem button component="a" href={`deleteproblem/${item.id}`}>
+                <ListItem  component="a" href="javascript:" onClick={() => {deleteProblem(`${item.id}`) }}>
                   <ListItemText primary="Delete" />
                 </ListItem>
 
                 </TableCell>               
                 </TableRow>
             ))}
+            <Dialog open={openSuccess} onClose={handleSuccessMessage}>
+                    <Alert severity="success">   Problem is Deleted !! </Alert>                
+            </Dialog>
             </TableBody>
         </Table>
         </TableContainer> 
